@@ -3,12 +3,13 @@ package soumission;
 import code_squelette.Labyrinthe;
 import code_squelette.Piece;
 import code_squelette.Exterieur;
-import code_squelette.RencontreType;
 
 public class MonLabyrinthe implements Labyrinthe { //TODO: extends ? implements?
 
-    int maxPiece = 50;
-    Piece[] piecesLabyrinthe = new Piece[maxPiece];
+    int maxPieceLab = 50;
+    int maxPieceAdj = 8;
+    Piece[] piecesLabyrinthe = new Piece[maxPieceLab];
+    Piece[][] listesAdj = new Piece[maxPieceLab][maxPieceAdj];
 
     @Override
     public Piece[] getPieces(){
@@ -42,6 +43,17 @@ public class MonLabyrinthe implements Labyrinthe { //TODO: extends ? implements?
         if (piecesLabyrinthe[idPiece] == null){
             piecesLabyrinthe[idPiece] = e;
         }
-
+        for (int i = 0; i < 8; i++){
+            if (listesAdj[0][i] == null){
+                listesAdj[0][i] = e;
+                break;
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if (listesAdj[idPiece][i] == null){
+                listesAdj[idPiece][i] = out;
+                break;
+            }
+        }
     }
 }
