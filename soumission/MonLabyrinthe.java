@@ -1,6 +1,6 @@
 package soumission;
 
-import code_s1quelette.Labyrinthe;
+import code_squelette.Labyrinthe;
 import code_squelette.Piece;
 import code_squelette.Exterieur;
 import code_squelette.RencontreType;
