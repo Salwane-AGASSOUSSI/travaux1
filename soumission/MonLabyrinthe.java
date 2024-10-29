@@ -52,7 +52,7 @@ public class MonLabyrinthe implements Labyrinthe { //TODO: extends ? implements?
         for (int i = 0; i < 8; i++){
             if (listesAdj[idPiece][i] == null){
                 listesAdj[idPiece][i] = out;
-                break;
+                break; //hihi
             }
         }
     }
