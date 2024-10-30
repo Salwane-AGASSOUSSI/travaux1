@@ -98,6 +98,9 @@ public class DIROgue {
 		// Génération et affichage du rapport
 		String rapport = genererRapport(aventure);
 		System.out.println(rapport);
+		String scenario = genererScenario(aventure);
+		System.out.println(scenario);
+
 	}
 
 	/*
@@ -174,7 +177,64 @@ public class DIROgue {
 
 	// Méthode de génération de scénario
 	public static String genererScenario(Aventure a) {
-		// TODO: à remplir!
-		return null;
+		// Récupère le chemin menant au boss
+		Piece[] chemin = a.cheminJusquAuBoss();
+
+		// Initialise la chaîne de scénario
+		String retour = "Scenario" +"\n";
+
+		// Parcourt chaque pièce du chemin
+		for (int i = 0; i < chemin.length; i++) {
+			// Gère les différents types de rencontres
+			if (chemin[i].getRencontreType() == RencontreType.RIEN){
+				// Crée une rencontre de type "Rien"
+				Rien rien = new Rien();
+				String retourRien = rien.rencontrer();
+				retour += retourRien + "\n";
+			} else if (chemin[i].getRencontreType() == RencontreType.BOSS) {
+				// Crée une rencontre de type "Boss"
+				Boss boss = new Boss();
+				String retourBoss = boss.rencontrer();
+				retour += retourBoss + "\n";
+			} else if (chemin[i].getRencontreType() == RencontreType.MONSTRE) {
+				// Crée une rencontre de type "Monstre" avec sélection aléatoire
+				Monstre x = new Monstre();
+				int r = new Random().nextInt(3);
+				switch (r) {
+					case 0:
+						x = new Orque(); // Choix 1 : Orque
+						break;
+					case 1:
+						x = new Gargouille(); // Choix 2 : Gargouille
+						break;
+					case 2:
+						x = new Gobelin(); // Choix 3 : Gobelin
+				}
+
+				// Génère la description de la rencontre avec le monstre
+				String retourMonstre = x.rencontrer();
+				retour += retourMonstre + "\n";
+
+			} else if (chemin[i].getRencontreType() == RencontreType.TRESOR) {
+				// Crée une rencontre de type "Trésor" avec sélection aléatoire
+				Tresor x = new Tresor();
+				int r = new Random().nextInt(3);
+				switch (r) {
+					case 0:
+						x = new SacDeButin(); // Choix 1 : Sac de butin
+						break;
+					case 1:
+						x = new Potion(); // Choix 2 : Potion
+						break;
+					case 2:
+						x = new ArtefactMagique(); // Choix 3 : Artefact magique
+				}
+				// Génère la description de la rencontre avec le trésor
+				String retourTresor = x.rencontrer();
+				retour += retourTresor + "\n";
+			}
+		}
+		// Retourne le scénario généré
+		return retour;
 	}
 }
