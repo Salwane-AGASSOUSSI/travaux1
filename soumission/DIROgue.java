@@ -32,7 +32,7 @@ public class DIROgue {
 				} else if (ligne.startsWith("piece")) {
 					String[] infos = ligne.split(" ");
 					/**
-					 * On confirme si c'est le bon format.
+					 * On confirme si c'est le bon format!
 					 */
 					if (infos.length == 3) {
 						int id = Integer.parseInt(infos[1]);
