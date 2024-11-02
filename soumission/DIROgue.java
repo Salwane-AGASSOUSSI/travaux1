@@ -10,6 +10,8 @@ public class DIROgue {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		MonLabyrinthe labyrintheLive = new MonLabyrinthe();
+		Exterieur lExterieur = Exterieur.getExterieur();
+		labyrintheLive.piecesLabyrinthe[0] = lExterieur;
 		MonAventure aventureLive = new MonAventure(labyrintheLive);
 
 
@@ -68,7 +70,6 @@ public class DIROgue {
 						int id2 = Integer.parseInt(infos[2]);
 						if (labyrintheLive.piecesLabyrinthe[id1] == null || labyrintheLive.piecesLabyrinthe[id2] == null){
 							System.out.println("L'une des pieces n'existe pas");
-							break;
 						} else {
 							labyrintheLive.ajouteCorridor(labyrintheLive.piecesLabyrinthe[id1], labyrintheLive.piecesLabyrinthe[id2]);
 						}
@@ -77,32 +78,18 @@ public class DIROgue {
 			}
 		}
 
+		genererRapport(aventureLive);
 
-
-
-		// Cette invocation est ici juste pour vous demontrer quelques choses
-		// TODO: supprimez l'appel a la methode expliquerQuelquesChoses()
-		expliquerQuelquesChoses();
-
-	}
-
-	/*
-	 * Cette methode n'est pas necessaire pour le TP, c'est ici juste pour vous
-	 * demontrer comment utiliser la classe Exterieur.
-	 */
-	private static void expliquerQuelquesChoses() {
-		// ceci est la seule facon de creer une instance de la classe Exterieur!
-		Exterieur lExterieur = Exterieur.getExterieur();
-		// l'exterieur contient le type de rencontre RencontreType.RIEN
-		System.out.println(lExterieur.getRencontreType() == RencontreType.RIEN);
 	}
 
 	public static String genererRapport(Aventure a) {
 		System.out.println("Rapport:");
 		System.out.println("Donjon avec " + a.getLabyrinthe().nombreDePieces() + " pieces:");
-		for (Piece piece: a.getLabyrinthe().getPieces()){
-			Piece [] piecesConnectees = a.getLabyrinthe().getPiecesConnectees(piece);
-			System.out.println(piece + " : " + Arrays.toString(piecesConnectees));
+		for (Piece piece: a.getLabyrinthe().getPieces()) {
+			if (piece != null) {
+				Piece[] piecesConnectees = a.getLabyrinthe().getPiecesConnectees(piece);
+				System.out.println(piece + " : " + Arrays.toString(piecesConnectees));
+			}
 		}
 		return null;
 	}
